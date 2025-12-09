@@ -8,46 +8,64 @@ index.html – full HTML structure
 
 style.css – all styling (no Tailwind, no Bootstrap, pure CSS)
 
-Requirements:
+``` prompt
+# Role
+You are an expert Senior Frontend Engineer and UI/UX Designer. Your task is to build a high-performance, responsive personal portfolio website using **only** HTML and CSS.
 
-Include the following sections in the HTML:
+# Context & User Data
+Please populate the site with the following details. If a field is empty, use a professional placeholder.
 
-Header + Navigation (Links: Overview, Skills, Tech Stack, Projects, Contact)
+**Personal Details:**
+- Full Name: {{FULL_NAME}}
+- Role/Title: {{CURRENT_ROLE}} (e.g., "Systems Engineer")
+- Tagline: {{SHORT_TAGLINE}}
+- Location: {{LOCATION}}
 
-Hero/Overview Section – Name, short description (CS student), role, resume button
+**Education:**
+- University: {{UNIVERSITY_NAME}}
+- Degree: {{DEGREE_MAJOR}}
+- Grad Year: {{GRAD_YEAR}}
 
-Skills Section – Organized list with skill bars / percentages
+**Technical Skills:**
+- Languages: {{PROGRAMMING_LANGUAGES}}
+- Tools/Platforms: {{FRAMEWORKS_TOOLS}}
+- Core Concepts: {{CORE_CONCEPTS}}
 
-Tech Stack Section – Icons or badges for languages, tools, frameworks
+**Projects (Highlight 2-3):**
+1. {{PROJECT_1_NAME}}: {{PROJECT_1_DESC}}
+2. {{PROJECT_2_NAME}}: {{PROJECT_2_DESC}}
+3. {{PROJECT_3_NAME}}: {{PROJECT_3_DESC}}
 
-Projects Section – Cards with title, description, tech used, GitHub / Live links
+**Interests:**
+- Hobbies: {{HOBBIES}}
+- Soft Skills: {{SOFT_SKILLS}}
 
-Education Section – Degree, University, Graduation year
+**Links:**
+- GitHub: {{GITHUB_URL}}
+- LinkedIn: {{LINKEDIN_URL}}
+- Email: {{EMAIL_ADDRESS}}
 
-Contact/Footer – Email, GitHub, LinkedIn, Copyright
+# Design Requirements
+1. **Theme:** Dark mode default. Use a "Hacker/Terminal" aesthetic (e.g., dark gray backgrounds, neon accent colors).
+2. **Typography:** Use distinct monospaced fonts for headers.
+3. **Responsiveness:** Must look perfect on mobile and desktop.
+4. **Layout:** Single-page scrolling design with a sticky navigation bar.
 
-Hobby section - Hobbies
+# Technical Constraints
+- **File Structure:** You must provide exactly **two** files:
+  1. `index.html`
+  2. `style.css`
+- **No External Libraries:** Do not use Bootstrap, Tailwind, or external JS frameworks. Use vanilla CSS (Flexbox/Grid).
+- **JavaScript:** If any interactivity is needed (like a mobile menu toggle), write the JavaScript strictly **inside a `<script>` tag at the bottom of the HTML file**. Do not create a separate .js file.
 
-The CSS file should:
+# Output Instructions
+Please generate the full code for these two files below.
 
-Make the layout fully responsive (mobile-first)
+## File 1: index.html
+- Should link to `style.css`.
+- Should contain semantic HTML5 tags (<header>, <main>, <section>, <footer>).
+- Should contain the embedded JS for the mobile menu or simple animations.
 
-Use modern design (flexbox or grid, hover effects, clean fonts, smooth transitions)
-
-Have variables for colors and fonts at the top
-
-Include a dark/light mode toggle (JavaScript in HTML, CSS variables in CSS)
-
-Use semantic HTML5 tags (<header>, <main>, <section>, <footer>, <nav>, etc.)
-
-Use placeholder content (name, skills, project links) and add comments like <!-- Change Name Here -->
-
-Do NOT use external frameworks or CDN libraries
-
-Final output should be two separate files:
-
-First: full index.html
-
-Second: full style.css
-
-Output only the code for both files, nothing else.
+## File 2: style.css
+- Should contain all styling, variables for colors, and media queries for responsiveness.
+```
