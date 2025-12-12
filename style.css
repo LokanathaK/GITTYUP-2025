@@ -1,0 +1,434 @@
+/* ========================================
+   VARIABLES & RESET
+========================================
+*/
+:root {
+    --bg-color: #0a0a0a;
+    --card-bg: #111111;
+    --text-color: #e0e0e0;
+    --accent-color: #00ff41; /* Hacker Green */
+    --secondary-accent: #008F11; /* Darker Green */
+    --font-mono: 'Courier New', Courier, monospace;
+    --spacing-md: 2rem;
+    --border-color: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   UTILITIES
+========================================
+*/
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.accent {
+    color: var(--accent-color);
+}
+
+.comment {
+    color: #666;
+    font-style: italic;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* CRT Scanline Overlay */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* ========================================
+   NAVIGATION
+========================================
+*/
+#navbar {
+    background-color: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid var(--secondary-accent);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-shadow: 0 0 5px var(--secondary-accent);
+}
+
+.nav-links ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.btn-nav {
+    border: 1px solid var(--accent-color);
+    padding: 5px 15px;
+    border-radius: 2px;
+}
+
+.btn-nav:hover {
+    background-color: rgba(0, 255, 65, 0.1);
+}
+
+/* Mobile Hamburger */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    height: 3px;
+    width: 25px;
+    background-color: var(--accent-color);
+    margin: 3px 0;
+    transition: 0.4s;
+}
+
+/* ========================================
+   HERO SECTION
+========================================
+*/
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: var(--secondary-accent);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+/* Glitch Effect Setup */
+.glitch {
+    position: relative;
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 red;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 blue;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim-2 2s infinite linear alternate-reverse;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 12px 24px;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid var(--accent-color);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn.primary {
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+.btn.primary:hover {
+    background-color: var(--accent-color);
+    color: #000;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.btn.secondary {
+    border-color: #666;
+    color: #aaa;
+}
+
+.btn.secondary:hover {
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+
+/* ========================================
+   SECTIONS & COMPONENTS
+========================================
+*/
+section {
+    padding: 80px 0;
+}
+
+/* Grids */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+/* Cards */
+.card, .project-card {
+    background-color: var(--card-bg);
+    border: 1px solid #333;
+    padding: 1.5rem;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+}
+
+.card:hover, .project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.card h3, .project-card h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+/* Terminal List */
+.terminal-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* Project Specifics */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.badge {
+    font-size: 0.8rem;
+    border: 1px solid #666;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.tech-stack {
+    margin-top: 1rem;
+    display: flex;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.tech-stack span::before {
+    content: "#";
+    color: var(--secondary-accent);
+}
+
+/* Education Timeline */
+.timeline {
+    border-left: 2px solid #333;
+    margin-left: 10px;
+    padding-left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+}
+
+.timeline-item .year {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Contact */
+.contact-links {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.socials {
+    margin-top: 1rem;
+}
+
+.socials a {
+    margin: 0 10px;
+    border-bottom: 1px solid transparent;
+}
+
+.socials a:hover {
+    border-bottom: 1px solid var(--accent-color);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #222;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* ========================================
+   ANIMATIONS & KEYFRAMES
+========================================
+*/
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 80px, 0); }
+    20% { clip: rect(40px, 9999px, 10px, 0); }
+    100% { clip: rect(90px, 9999px, 30px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(60px, 9999px, 10px, 0); }
+    20% { clip: rect(10px, 9999px, 90px, 0); }
+    100% { clip: rect(30px, 9999px, 60px, 0); }
+}
+
+/* ========================================
+   MEDIA QUERIES (RESPONSIVENESS)
+========================================
+*/
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    
+    .menu-toggle { display: flex; }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg);
+        border-bottom: 2px solid var(--accent-color);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        transform: translateY(-200%); /* Hidden by default */
+        transition: 0.5s;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
